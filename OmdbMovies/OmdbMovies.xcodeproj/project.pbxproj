@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8E3B4DDB274B30E2007CF355 /* MovieModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3B4DDA274B30E2007CF355 /* MovieModel.swift */; };
+		8E3B4DE2274B3E0B007CF355 /* MovieServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3B4DE1274B3E0B007CF355 /* MovieServices.swift */; };
+		8E3B4DE5274B3E89007CF355 /* OmdbResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3B4DE4274B3E89007CF355 /* OmdbResponseModel.swift */; };
 		8EDCE7202748B087003040B5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDCE71F2748B087003040B5 /* AppDelegate.swift */; };
 		8EDCE7222748B087003040B5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDCE7212748B087003040B5 /* SceneDelegate.swift */; };
 		8EDCE7242748B087003040B5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDCE7232748B087003040B5 /* ViewController.swift */; };
@@ -16,6 +19,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8E3B4DDA274B30E2007CF355 /* MovieModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieModel.swift; sourceTree = "<group>"; };
+		8E3B4DE1274B3E0B007CF355 /* MovieServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieServices.swift; sourceTree = "<group>"; };
+		8E3B4DE4274B3E89007CF355 /* OmdbResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OmdbResponseModel.swift; sourceTree = "<group>"; };
 		8EDCE71C2748B087003040B5 /* OmdbMovies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OmdbMovies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EDCE71F2748B087003040B5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8EDCE7212748B087003040B5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -37,6 +43,51 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8E3B4DD9274B30B7007CF355 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8E3B4DDA274B30E2007CF355 /* MovieModel.swift */,
+				8E3B4DE4274B3E89007CF355 /* OmdbResponseModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		8E3B4DDC274B30E7007CF355 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		8E3B4DDD274B3A91007CF355 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		8E3B4DDE274B3AA5007CF355 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8E3B4DDF274B3DE8007CF355 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		8E3B4DE0274B3DF2007CF355 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				8E3B4DE1274B3E0B007CF355 /* MovieServices.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		8EDCE7132748B087003040B5 = {
 			isa = PBXGroup;
 			children = (
@@ -56,6 +107,12 @@
 		8EDCE71E2748B087003040B5 /* OmdbMovies */ = {
 			isa = PBXGroup;
 			children = (
+				8E3B4DE0274B3DF2007CF355 /* Services */,
+				8E3B4DDF274B3DE8007CF355 /* Network */,
+				8E3B4DDE274B3AA5007CF355 /* View */,
+				8E3B4DDD274B3A91007CF355 /* ViewController */,
+				8E3B4DD9274B30B7007CF355 /* Model */,
+				8E3B4DDC274B30E7007CF355 /* ViewModel */,
 				8EDCE71F2748B087003040B5 /* AppDelegate.swift */,
 				8EDCE7212748B087003040B5 /* SceneDelegate.swift */,
 				8EDCE7232748B087003040B5 /* ViewController.swift */,
@@ -140,6 +197,9 @@
 			files = (
 				8EDCE7242748B087003040B5 /* ViewController.swift in Sources */,
 				8EDCE7202748B087003040B5 /* AppDelegate.swift in Sources */,
+				8E3B4DE5274B3E89007CF355 /* OmdbResponseModel.swift in Sources */,
+				8E3B4DE2274B3E0B007CF355 /* MovieServices.swift in Sources */,
+				8E3B4DDB274B30E2007CF355 /* MovieModel.swift in Sources */,
 				8EDCE7222748B087003040B5 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
