@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  OmdbMovies
 //
-//  Created by DucNT65.FIN on 11/20/21.
+//  Created by LongTM3 on 11/20/21.
 //
 
 import UIKit

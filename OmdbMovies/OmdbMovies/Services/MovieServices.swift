@@ -2,11 +2,22 @@
 //  MovieServices.swift
 //  OmdbMovies
 //
-//  Created by DucNT65.FIN on 11/22/21.
+//  Created by LongTM3 on 11/22/21.
 //
 
 import Foundation
 
-class MovieServices {
+protocol MovieServicesProtocol {
+    func searchForMovie(_ s: String, page: Int?) -> [MovieListModel]?
+    func movieDetail(_ movieId: String) -> MovieModel?
+}
 
+class MovieServices: MovieServicesProtocol {
+    public func searchForMovie(_ s: String, page: Int?) -> [MovieListModel]? {
+        return []
+    }
+
+    public func movieDetail(_ movieId: String) -> MovieModel? {
+        return nil
+    }
 }
