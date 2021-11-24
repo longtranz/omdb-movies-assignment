@@ -9,28 +9,37 @@
 import Foundation
 import RxSwift
 import RxRelay
+import UIKit
 
 class MovieViewModel {
     let movies: PublishSubject<[MovieListModel]> = PublishSubject()
-    let loading: PublishSubject<Bool> = PublishSubject()
+    let loading: PublishRelay<Bool> = PublishRelay()
     let error: PublishSubject<Error> = PublishSubject()
 
-    private var currentQuery = BehaviorRelay(value: "Marvel")
-    private var currentPage: Int = 0
+    var currentQuery: BehaviorRelay<String> = BehaviorRelay(value: "Marvel")
+    var currentPage: BehaviorRelay<Int> = BehaviorRelay(value: 1)
+
     private let movieServices = MovieServices()
+    private let disposeBag = DisposeBag()
 
-    func searchMovie(_ query: String) {
-        loading.onNext(true)
-        if query == currentQuery.value {
-            currentPage = currentPage + 1
-        } else {
-            currentPage = 0
-        }
+    init() {
+        currentQuery.subscribe(onNext: { [weak self] query in
+            guard let strongSelf = self else { return }
+            strongSelf.searchMovie(query)
+        }).disposed(by: disposeBag)
+    }
 
-        movieServices.searchForMovie(query, page: currentPage).subscribe { moviesResponse in
+    private func searchMovie(_ query: String) {
+        loading.accept(true)
 
-        } onError: { [weak self] e in
+        movieServices.searchForMovie(query, page: currentPage.value)
+            .subscribe( onNext: { [weak self] moviesResponse in
+            self?.loading.accept(false)
+            if let movies = moviesResponse.search {
+                self?.movies.onNext(movies)
+            }
+        }, onError: { [weak self] e in
             self?.error.onNext(e)
-        }
+        }).disposed(by: disposeBag)
     }
 }
