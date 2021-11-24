@@ -8,30 +8,29 @@
 
 import Foundation
 import RxSwift
+import RxRelay
 
 class MovieViewModel {
     let movies: PublishSubject<[MovieListModel]> = PublishSubject()
     let loading: PublishSubject<Bool> = PublishSubject()
-    let error: PublishSubject<OmdbApiError> = PublishSubject()
+    let error: PublishSubject<Error> = PublishSubject()
 
-    private var currentQuery: String = ""
+    private var currentQuery = BehaviorRelay(value: "Marvel")
     private var currentPage: Int = 0
     private let movieServices = MovieServices()
 
     func searchMovie(_ query: String) {
         loading.onNext(true)
-        if query == currentQuery {
+        if query == currentQuery.value {
             currentPage = currentPage + 1
         } else {
             currentPage = 0
-            currentQuery = query
         }
 
         movieServices.searchForMovie(query, page: currentPage).subscribe { moviesResponse in
-            movies
-        } onError: { <#Error#> in
-            <#code#>
-        }
 
+        } onError: { [weak self] e in
+            self?.error.onNext(e)
+        }
     }
 }
