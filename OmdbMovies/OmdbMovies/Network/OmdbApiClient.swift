@@ -11,23 +11,32 @@ import Alamofire
 import RxSwift
 
 class OmdbApiClient {
-    func request<T: Decodable> (_ router: OmdbRouter) -> Observable<T> {
+    static func request<T: Decodable> (_ router: OmdbRouter, onCompletion: @escaping (T) -> Void, onError: @escaping (OmdbApiError) -> Void) {
         let session = Alamofire.Session.default
 
-        return Observable<T>.create { observer in
-            let request = session.request(router).validate().responseDecodable(of: T.self) { response in
-                guard let data = response.value else {
-                    observer.onError(OmdbApiError.error(message: "Cannot get data"))
-                    return
-                }
+//        session.request(router).validate().responseDecodable(of: T.self) { response in
+//            guard let data = response.value else {
+//                onError(OmdbApiError.error(message: "Cannot get data"))
+//                return
+//            }
+//
+//            onCompletion(data)
+//        }
 
-                observer.onNext(data)
-                observer.onCompleted()
+        session.request(router).validate().responseJSON { response in
+            guard let data = response.data else {
+                onError(OmdbApiError.error(message: "Cannot get data"))
+                return
             }
 
-            return Disposables.create {
-                request.cancel()
+            do {
+                let value = try JSONDecoder().decode(T.self, from: data)
+                onCompletion(value)
+            } catch {
+                print(error)
+                onError(OmdbApiError.error(message: "Cannot parse data"))
             }
         }
+
     }
 }

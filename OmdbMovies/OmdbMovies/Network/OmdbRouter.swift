@@ -11,7 +11,7 @@ import RxSwift
 import Alamofire
 
 enum OmdbRouter: URLRequestConvertible {
-    case search(query: String, page: Int)
+    case search(query: String, page: Int?)
     case detail(movieId: String)
 
     private var method: HTTPMethod {
@@ -27,7 +27,10 @@ enum OmdbRouter: URLRequestConvertible {
         switch self {
         case .search(let query, let page):
             params.updateValue(query, forKey: AppConstants.API.Parameters.searchQuery)
-            params.updateValue(String(page), forKey: AppConstants.API.Parameters.page)
+
+            if let page = page {
+                params.updateValue(String(page), forKey: AppConstants.API.Parameters.page)
+            }
         case .detail(let movieId):
             params.updateValue(movieId, forKey: AppConstants.API.Parameters.movieId)
         }

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8E174C2F274BF02200237749 /* MovieModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E174C2E274BF02200237749 /* MovieModel.swift */; };
 		8E174C31274BF2B100237749 /* OmdbRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E174C30274BF2B100237749 /* OmdbRouter.swift */; };
+		8E28E83F274E96A400CD2089 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E28E83E274E96A400CD2089 /* StringExtension.swift */; };
 		8E3B4DDB274B30E2007CF355 /* MovieListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3B4DDA274B30E2007CF355 /* MovieListModel.swift */; };
 		8E3B4DE2274B3E0B007CF355 /* MovieServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3B4DE1274B3E0B007CF355 /* MovieServices.swift */; };
 		8E3B4DE5274B3E89007CF355 /* MovieListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3B4DE4274B3E89007CF355 /* MovieListResponse.swift */; };
@@ -25,9 +26,12 @@
 		8E49FF43274D4D8B000667E3 /* MovieViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E49FF42274D4D8B000667E3 /* MovieViewModel.swift */; };
 		8EB1E6E0274C5C9F0012361A /* OmdbApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB1E6DF274C5C9F0012361A /* OmdbApiClient.swift */; };
 		8EB1E6E2274C617D0012361A /* OmdbApiError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB1E6E1274C617D0012361A /* OmdbApiError.swift */; };
+		8EC6B728274E439100D3ED3D /* MovieDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC6B727274E439100D3ED3D /* MovieDetailViewController.swift */; };
+		8EC6B72A274E47EE00D3ED3D /* MovieListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC6B729274E47EE00D3ED3D /* MovieListCollectionViewCell.swift */; };
+		8EC6B72D274E57A600D3ED3D /* AlamofireNetworkActivityLogger in Frameworks */ = {isa = PBXBuildFile; productRef = 8EC6B72C274E57A600D3ED3D /* AlamofireNetworkActivityLogger */; };
 		8EDCE7202748B087003040B5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDCE71F2748B087003040B5 /* AppDelegate.swift */; };
 		8EDCE7222748B087003040B5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDCE7212748B087003040B5 /* SceneDelegate.swift */; };
-		8EDCE7242748B087003040B5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDCE7232748B087003040B5 /* ViewController.swift */; };
+		8EDCE7242748B087003040B5 /* MovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDCE7232748B087003040B5 /* MovieViewController.swift */; };
 		8EDCE7272748B087003040B5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8EDCE7252748B087003040B5 /* Main.storyboard */; };
 		8EDCE7292748B088003040B5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8EDCE7282748B088003040B5 /* Assets.xcassets */; };
 		8EDCE72C2748B088003040B5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8EDCE72A2748B088003040B5 /* LaunchScreen.storyboard */; };
@@ -36,6 +40,7 @@
 /* Begin PBXFileReference section */
 		8E174C2E274BF02200237749 /* MovieModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MovieModel.swift; path = OmdbMovies/Model/MovieModel.swift; sourceTree = SOURCE_ROOT; };
 		8E174C30274BF2B100237749 /* OmdbRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OmdbRouter.swift; sourceTree = "<group>"; };
+		8E28E83E274E96A400CD2089 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		8E3B4DDA274B30E2007CF355 /* MovieListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListModel.swift; sourceTree = "<group>"; };
 		8E3B4DE1274B3E0B007CF355 /* MovieServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieServices.swift; sourceTree = "<group>"; };
 		8E3B4DE4274B3E89007CF355 /* MovieListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListResponse.swift; sourceTree = "<group>"; };
@@ -47,10 +52,12 @@
 		8E49FF42274D4D8B000667E3 /* MovieViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieViewModel.swift; sourceTree = "<group>"; };
 		8EB1E6DF274C5C9F0012361A /* OmdbApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OmdbApiClient.swift; sourceTree = "<group>"; };
 		8EB1E6E1274C617D0012361A /* OmdbApiError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OmdbApiError.swift; sourceTree = "<group>"; };
+		8EC6B727274E439100D3ED3D /* MovieDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailViewController.swift; sourceTree = "<group>"; };
+		8EC6B729274E47EE00D3ED3D /* MovieListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListCollectionViewCell.swift; sourceTree = "<group>"; };
 		8EDCE71C2748B087003040B5 /* OmdbMovies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OmdbMovies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EDCE71F2748B087003040B5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8EDCE7212748B087003040B5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		8EDCE7232748B087003040B5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		8EDCE7232748B087003040B5 /* MovieViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieViewController.swift; sourceTree = "<group>"; };
 		8EDCE7262748B087003040B5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8EDCE7282748B088003040B5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8EDCE72B2748B088003040B5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -65,6 +72,7 @@
 				8E3B4E00274B8234007CF355 /* RxCocoa in Frameworks */,
 				8E3B4DE8274B4485007CF355 /* Kingfisher in Frameworks */,
 				8E3B4E04274B8234007CF355 /* RxSwift in Frameworks */,
+				8EC6B72D274E57A600D3ED3D /* AlamofireNetworkActivityLogger in Frameworks */,
 				8E3B4E02274B8234007CF355 /* RxRelay in Frameworks */,
 				8E3B4DEB274B4500007CF355 /* Alamofire in Frameworks */,
 			);
@@ -95,6 +103,8 @@
 		8E3B4DDD274B3A91007CF355 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				8EDCE7232748B087003040B5 /* MovieViewController.swift */,
+				8EC6B727274E439100D3ED3D /* MovieDetailViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -102,6 +112,7 @@
 		8E3B4DDE274B3AA5007CF355 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8EC6B729274E47EE00D3ED3D /* MovieListCollectionViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -137,6 +148,7 @@
 			isa = PBXGroup;
 			children = (
 				8E3B4DF4274B7A44007CF355 /* AppConstants.swift */,
+				8E28E83E274E96A400CD2089 /* StringExtension.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -187,7 +199,6 @@
 				8E3B4DF3274B7A1C007CF355 /* Utils */,
 				8EDCE71F2748B087003040B5 /* AppDelegate.swift */,
 				8EDCE7212748B087003040B5 /* SceneDelegate.swift */,
-				8EDCE7232748B087003040B5 /* ViewController.swift */,
 				8EDCE7252748B087003040B5 /* Main.storyboard */,
 				8EDCE7282748B088003040B5 /* Assets.xcassets */,
 				8EDCE72A2748B088003040B5 /* LaunchScreen.storyboard */,
@@ -218,6 +229,7 @@
 				8E3B4DFF274B8234007CF355 /* RxCocoa */,
 				8E3B4E01274B8234007CF355 /* RxRelay */,
 				8E3B4E03274B8234007CF355 /* RxSwift */,
+				8EC6B72C274E57A600D3ED3D /* AlamofireNetworkActivityLogger */,
 			);
 			productName = OmdbMovies;
 			productReference = 8EDCE71C2748B087003040B5 /* OmdbMovies.app */;
@@ -252,6 +264,7 @@
 				8E3B4DE6274B4485007CF355 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				8E3B4DE9274B4500007CF355 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				8E3B4DFE274B8234007CF355 /* XCRemoteSwiftPackageReference "RxSwift" */,
+				8EC6B72B274E57A600D3ED3D /* XCRemoteSwiftPackageReference "AlamofireNetworkActivityLogger" */,
 			);
 			productRefGroup = 8EDCE71D2748B087003040B5 /* Products */;
 			projectDirPath = "";
@@ -283,16 +296,19 @@
 			files = (
 				8E174C2F274BF02200237749 /* MovieModel.swift in Sources */,
 				8E3B4DF2274B53C0007CF355 /* MovieResponse.swift in Sources */,
-				8EDCE7242748B087003040B5 /* ViewController.swift in Sources */,
+				8EDCE7242748B087003040B5 /* MovieViewController.swift in Sources */,
 				8EDCE7202748B087003040B5 /* AppDelegate.swift in Sources */,
 				8E3B4DE5274B3E89007CF355 /* MovieListResponse.swift in Sources */,
 				8E3B4DE2274B3E0B007CF355 /* MovieServices.swift in Sources */,
+				8EC6B72A274E47EE00D3ED3D /* MovieListCollectionViewCell.swift in Sources */,
 				8E3B4DF5274B7A44007CF355 /* AppConstants.swift in Sources */,
 				8E3B4DED274B5208007CF355 /* RatingModel.swift in Sources */,
 				8E3B4DF0274B5243007CF355 /* OmdbType.swift in Sources */,
 				8E3B4DDB274B30E2007CF355 /* MovieListModel.swift in Sources */,
 				8EDCE7222748B087003040B5 /* SceneDelegate.swift in Sources */,
 				8E49FF43274D4D8B000667E3 /* MovieViewModel.swift in Sources */,
+				8EC6B728274E439100D3ED3D /* MovieDetailViewController.swift in Sources */,
+				8E28E83F274E96A400CD2089 /* StringExtension.swift in Sources */,
 				8EB1E6E0274C5C9F0012361A /* OmdbApiClient.swift in Sources */,
 				8E174C31274BF2B100237749 /* OmdbRouter.swift in Sources */,
 				8EB1E6E2274C617D0012361A /* OmdbApiError.swift in Sources */,
@@ -545,6 +561,14 @@
 				minimumVersion = 6.0.0;
 			};
 		};
+		8EC6B72B274E57A600D3ED3D /* XCRemoteSwiftPackageReference "AlamofireNetworkActivityLogger" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/konkab/AlamofireNetworkActivityLogger.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -572,6 +596,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8E3B4DFE274B8234007CF355 /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxSwift;
+		};
+		8EC6B72C274E57A600D3ED3D /* AlamofireNetworkActivityLogger */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8EC6B72B274E57A600D3ED3D /* XCRemoteSwiftPackageReference "AlamofireNetworkActivityLogger" */;
+			productName = AlamofireNetworkActivityLogger;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

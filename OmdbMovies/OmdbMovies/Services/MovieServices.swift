@@ -9,23 +9,32 @@ import Foundation
 import RxSwift
 
 protocol MovieServicesProtocol {
-    func searchForMovie(_ s: String, page: Int?) -> Observable<[MovieListModel]?>
-    func movieDetail(_ movieId: String) -> Observable<MovieResponse?>
+    func searchForMovie(_ s: String, page: Int?) -> Observable<MovieListResponse>
+    func movieDetail(_ movieId: String) -> Observable<MovieResponse>
 }
 
 class MovieServices: MovieServicesProtocol {
-    private let omdbClient = OmdbApiClient()
+    let disposeBag = DisposeBag()
 
-    public func searchForMovie(_ s: String, page: Int?) -> Observable<[MovieListModel]?> {
-        omdbClient.request(OmdbRouter.search(query: s, page: page ?? 0)).observe(on: MainScheduler.instance).subscribe { movieListResponse in
+    public func searchForMovie(_ query: String, page: Int?) -> Observable<MovieListResponse> {
+        return Observable<MovieListResponse>.create { observer in
+            OmdbApiClient.request(OmdbRouter.search(query: query, page: page)) { (moviesResponse: MovieListResponse) in
+                if !moviesResponse.response {
+                    observer.onError(OmdbApiError.error(message: moviesResponse.error ?? "API Error"))
+                }
 
-        } onError: { <#Error#> in
-            <#code#>
+                observer.onNext(moviesResponse)
+            } onError: { error in
+                observer.onError(error)
+            }
+
+            return Disposables.create()
         }
-
     }
 
-    public func movieDetail(_ movieId: String) -> Observable<MovieResponse?> {
-        return Observable.just(nil)
+    public func movieDetail(_ movieId: String) -> Observable<MovieResponse> {
+        return Observable<MovieResponse>.create { observer in
+            return Disposables.create()
+        }
     }
 }
