@@ -10,6 +10,8 @@
 		8E174C2F274BF02200237749 /* MovieModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E174C2E274BF02200237749 /* MovieModel.swift */; };
 		8E174C31274BF2B100237749 /* OmdbRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E174C30274BF2B100237749 /* OmdbRouter.swift */; };
 		8E28E83F274E96A400CD2089 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E28E83E274E96A400CD2089 /* StringExtension.swift */; };
+		8E28E844274F053C00CD2089 /* Differentiator in Frameworks */ = {isa = PBXBuildFile; productRef = 8E28E843274F053C00CD2089 /* Differentiator */; };
+		8E28E846274F053C00CD2089 /* RxDataSources in Frameworks */ = {isa = PBXBuildFile; productRef = 8E28E845274F053C00CD2089 /* RxDataSources */; };
 		8E3B4DDB274B30E2007CF355 /* MovieListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3B4DDA274B30E2007CF355 /* MovieListModel.swift */; };
 		8E3B4DE2274B3E0B007CF355 /* MovieServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3B4DE1274B3E0B007CF355 /* MovieServices.swift */; };
 		8E3B4DE5274B3E89007CF355 /* MovieListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E3B4DE4274B3E89007CF355 /* MovieListResponse.swift */; };
@@ -29,6 +31,7 @@
 		8EC6B728274E439100D3ED3D /* MovieDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC6B727274E439100D3ED3D /* MovieDetailViewController.swift */; };
 		8EC6B72A274E47EE00D3ED3D /* MovieListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC6B729274E47EE00D3ED3D /* MovieListCollectionViewCell.swift */; };
 		8EC6B72D274E57A600D3ED3D /* AlamofireNetworkActivityLogger in Frameworks */ = {isa = PBXBuildFile; productRef = 8EC6B72C274E57A600D3ED3D /* AlamofireNetworkActivityLogger */; };
+		8ECE1746274F3FEC009DF3B1 /* MovieDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECE1745274F3FEC009DF3B1 /* MovieDetailViewModel.swift */; };
 		8EDCE7202748B087003040B5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDCE71F2748B087003040B5 /* AppDelegate.swift */; };
 		8EDCE7222748B087003040B5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDCE7212748B087003040B5 /* SceneDelegate.swift */; };
 		8EDCE7242748B087003040B5 /* MovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDCE7232748B087003040B5 /* MovieViewController.swift */; };
@@ -54,6 +57,7 @@
 		8EB1E6E1274C617D0012361A /* OmdbApiError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OmdbApiError.swift; sourceTree = "<group>"; };
 		8EC6B727274E439100D3ED3D /* MovieDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailViewController.swift; sourceTree = "<group>"; };
 		8EC6B729274E47EE00D3ED3D /* MovieListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListCollectionViewCell.swift; sourceTree = "<group>"; };
+		8ECE1745274F3FEC009DF3B1 /* MovieDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailViewModel.swift; sourceTree = "<group>"; };
 		8EDCE71C2748B087003040B5 /* OmdbMovies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OmdbMovies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EDCE71F2748B087003040B5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8EDCE7212748B087003040B5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -69,10 +73,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8E28E844274F053C00CD2089 /* Differentiator in Frameworks */,
 				8E3B4E00274B8234007CF355 /* RxCocoa in Frameworks */,
 				8E3B4DE8274B4485007CF355 /* Kingfisher in Frameworks */,
 				8E3B4E04274B8234007CF355 /* RxSwift in Frameworks */,
 				8EC6B72D274E57A600D3ED3D /* AlamofireNetworkActivityLogger in Frameworks */,
+				8E28E846274F053C00CD2089 /* RxDataSources in Frameworks */,
 				8E3B4E02274B8234007CF355 /* RxRelay in Frameworks */,
 				8E3B4DEB274B4500007CF355 /* Alamofire in Frameworks */,
 			);
@@ -96,6 +102,7 @@
 			isa = PBXGroup;
 			children = (
 				8E49FF42274D4D8B000667E3 /* MovieViewModel.swift */,
+				8ECE1745274F3FEC009DF3B1 /* MovieDetailViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -230,6 +237,8 @@
 				8E3B4E01274B8234007CF355 /* RxRelay */,
 				8E3B4E03274B8234007CF355 /* RxSwift */,
 				8EC6B72C274E57A600D3ED3D /* AlamofireNetworkActivityLogger */,
+				8E28E843274F053C00CD2089 /* Differentiator */,
+				8E28E845274F053C00CD2089 /* RxDataSources */,
 			);
 			productName = OmdbMovies;
 			productReference = 8EDCE71C2748B087003040B5 /* OmdbMovies.app */;
@@ -265,6 +274,7 @@
 				8E3B4DE9274B4500007CF355 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				8E3B4DFE274B8234007CF355 /* XCRemoteSwiftPackageReference "RxSwift" */,
 				8EC6B72B274E57A600D3ED3D /* XCRemoteSwiftPackageReference "AlamofireNetworkActivityLogger" */,
+				8E28E842274F053C00CD2089 /* XCRemoteSwiftPackageReference "RxDataSources" */,
 			);
 			productRefGroup = 8EDCE71D2748B087003040B5 /* Products */;
 			projectDirPath = "";
@@ -295,6 +305,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8E174C2F274BF02200237749 /* MovieModel.swift in Sources */,
+				8ECE1746274F3FEC009DF3B1 /* MovieDetailViewModel.swift in Sources */,
 				8E3B4DF2274B53C0007CF355 /* MovieResponse.swift in Sources */,
 				8EDCE7242748B087003040B5 /* MovieViewController.swift in Sources */,
 				8EDCE7202748B087003040B5 /* AppDelegate.swift in Sources */,
@@ -537,6 +548,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		8E28E842274F053C00CD2089 /* XCRemoteSwiftPackageReference "RxDataSources" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RxSwiftCommunity/RxDataSources.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 		8E3B4DE6274B4485007CF355 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
@@ -572,6 +591,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		8E28E843274F053C00CD2089 /* Differentiator */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8E28E842274F053C00CD2089 /* XCRemoteSwiftPackageReference "RxDataSources" */;
+			productName = Differentiator;
+		};
+		8E28E845274F053C00CD2089 /* RxDataSources */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8E28E842274F053C00CD2089 /* XCRemoteSwiftPackageReference "RxDataSources" */;
+			productName = RxDataSources;
+		};
 		8E3B4DE7274B4485007CF355 /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 8E3B4DE6274B4485007CF355 /* XCRemoteSwiftPackageReference "Kingfisher" */;

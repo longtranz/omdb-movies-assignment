@@ -7,24 +7,44 @@
 //
 
 import UIKit
+import Kingfisher
+import RxSwift
 
 class MovieDetailViewController: UIViewController {
+    @IBOutlet private weak var thumbnailImageView: UIImageView!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var yearLabel: UILabel!
+
+    private let movieDetailViewModel = MovieDetailViewModel()
+    private let disposeBag = DisposeBag()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        bindVM()
     }
-    
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func loadMovie(for movieId: String) {
+        movieDetailViewModel.fetchMovie(movieId)
     }
-    */
 
+    private func bindVM() {
+        movieDetailViewModel.movie.subscribe(onNext: { [weak self] movie in
+            guard let strongSelf = self else {
+                return
+            }
+
+            strongSelf.setupView(with: movie)
+        }).disposed(by: disposeBag)
+    }
+
+    private func setupView(with movie: MovieModel) {
+        if let poster = movie.poster, let thumbnailUrl = URL(string: poster) {
+            self.thumbnailImageView.kf.setImage(with: thumbnailUrl)
+        }
+
+        titleLabel.text = movie.title
+        yearLabel.text = movie.year
+    }
 }

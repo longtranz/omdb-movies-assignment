@@ -12,19 +12,23 @@ import RxRelay
 import UIKit
 
 class MovieViewModel {
-    let movies: PublishSubject<[MovieListModel]> = PublishSubject()
+    let movies: BehaviorRelay<[MovieListModel]> = BehaviorRelay(value: [])
     let loading: PublishRelay<Bool> = PublishRelay()
     let error: PublishSubject<Error> = PublishSubject()
 
     var currentQuery: BehaviorRelay<String> = BehaviorRelay(value: "Marvel")
-    var currentPage: BehaviorRelay<Int> = BehaviorRelay(value: 1)
+    var fetchMoreData: PublishSubject<Void> = PublishSubject()
+
+    var currentPage = 1
 
     private let movieServices = MovieServices()
     private let disposeBag = DisposeBag()
 
-    init() {
-        currentQuery.subscribe(onNext: { [weak self] query in
+    func bindView() {
+        currentQuery.distinctUntilChanged().filter({!$0.isEmpty}).subscribe(onNext: { [weak self] query in
             guard let strongSelf = self else { return }
+            strongSelf.currentPage = 1
+            strongSelf.movies.accept([])
             strongSelf.searchMovie(query)
         }).disposed(by: disposeBag)
     }
@@ -32,12 +36,15 @@ class MovieViewModel {
     private func searchMovie(_ query: String) {
         loading.accept(true)
 
-        movieServices.searchForMovie(query, page: currentPage.value)
+        movieServices.searchForMovie(query, page: currentPage)
+            .observe(on: MainScheduler.instance)
             .subscribe( onNext: { [weak self] moviesResponse in
-            self?.loading.accept(false)
-            if let movies = moviesResponse.search {
-                self?.movies.onNext(movies)
-            }
+                guard let strongSelf = self else { return }
+                strongSelf.loading.accept(false)
+                if let movies = moviesResponse.search {
+                    let oldMovieData = strongSelf.movies.value
+                    strongSelf.movies.accept(oldMovieData + movies)
+                }
         }, onError: { [weak self] e in
             self?.error.onNext(e)
         }).disposed(by: disposeBag)

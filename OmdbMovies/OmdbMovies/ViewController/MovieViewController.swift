@@ -8,28 +8,73 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import RxDataSources
 
-class MovieViewController: UIViewController {
+class MovieViewController: UIViewController, UICollectionViewDelegateFlowLayout {
     @IBOutlet private weak var moviesCollectionView: UICollectionView!
-    @IBOutlet private weak var movieSearchBar: UISearchBar!
+    private weak var refreshControl: UIRefreshControl!
+
+    private let MOVIE_CELL_IDENTIFIER = "MovieListCollectionViewCell"
+    private let MOVIE_SEARCHBAR_HEADER_IDENTIFIER = "CollectionViewHeader"
     
     private let movieViewModel = MovieViewModel()
-    private var movies: [MovieListModel] = []
+
+    private lazy var searchController: UISearchController = {
+        let sc = UISearchController(searchResultsController: nil)
+        sc.searchResultsUpdater = self
+        sc.delegate = self
+        sc.obscuresBackgroundDuringPresentation = false
+        sc.searchBar.placeholder = "Enter text for searching movie"
+        sc.searchBar.text = "Marvel"
+        return sc
+    }()
 
     let disposeBag = DisposeBag()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        bind()
+        setupNavigationBar()
+        setupView()
+        bindVM()
     }
 
-    private func bind() {
-        movieViewModel.movies.bind(to: moviesCollectionView.rx.items(cellIdentifier: "MovieListCollectionViewCell", cellType: MovieListCollectionViewCell.self)) { rowIndex, data, cell in
+    private func setupNavigationBar() {
+        navigationItem.searchController = searchController
+    }
+
+    private func setupView() {
+        moviesCollectionView.refreshControl = refreshControl
+    }
+
+    private func bindVM() {
+        movieViewModel.bindView()
+
+        movieViewModel.movies.bind(to: moviesCollectionView.rx.items(cellIdentifier: MOVIE_CELL_IDENTIFIER, cellType: MovieListCollectionViewCell.self)) { rowIndex, data, cell in
             cell.bindData(movie: data)
         }.disposed(by: disposeBag)
 
-        movieViewModel.currentQuery.bind(to: movieSearchBar.rx.text).disposed(by: disposeBag)
+        // Movie selected
+        Observable.zip(moviesCollectionView.rx.itemSelected, moviesCollectionView.rx.modelSelected(MovieListModel.self)).bind { [unowned self] indexPath, movie in
+            moviesCollectionView.deselectItem(at: indexPath, animated: true)
+            if let movieId = movie.imdbID {
+                self.showMovieDetail(movieId)
+            }
+        }.disposed(by: disposeBag)
+    }
+
+    private func showMovieDetail(_ movieId: String) {
+        guard let movieDetailViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MovieDetailViewController") as? MovieDetailViewController else {
+            fatalError("Cannot init MovieDetailViewController")
+        }
+
+        navigationController?.show(movieDetailViewController, sender: self)
+        movieDetailViewController.loadMovie(for: movieId)
     }
 }
 
+extension MovieViewController: UISearchControllerDelegate, UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+
+    }
+}

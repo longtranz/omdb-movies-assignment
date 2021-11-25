@@ -2,7 +2,7 @@
 //  MovieListCollectionViewCell.swift
 //  OmdbMovies
 //
-//  Created by DucNT65.FIN on 11/24/21.
+//  Created by LongTM3 on 11/24/21.
 //  Copyright © 2021 LongTM3. All rights reserved.
 //
 
@@ -14,7 +14,7 @@ class MovieListCollectionViewCell: UICollectionViewCell {
     @IBOutlet private var movieTitle: UILabel!
 
     func bindData(movie: MovieListModel) {
-        if let thumbnailUrl = URL(string: movie.poster) {
+        if let poster = movie.poster, let thumbnailUrl = URL(string: poster) {
             movieThumbnail.kf.setImage(with: thumbnailUrl)
         }
         movieTitle.text = movie.title
