@@ -25,11 +25,15 @@ class MovieViewModel {
     private let disposeBag = DisposeBag()
 
     func bindView() {
-        currentQuery.distinctUntilChanged().filter({!$0.isEmpty}).subscribe(onNext: { [weak self] query in
-            guard let strongSelf = self else { return }
-            strongSelf.currentPage = 1
-            strongSelf.movies.accept([])
-            strongSelf.searchMovie(query)
+        currentQuery
+            .distinctUntilChanged()
+            .debounce(RxTimeInterval.milliseconds(500), scheduler: MainScheduler.instance)
+            .filter({!$0.isEmpty})
+            .subscribe(onNext: { [weak self] query in
+                guard let strongSelf = self else { return }
+                strongSelf.currentPage = 1
+                strongSelf.movies.accept([])
+                strongSelf.searchMovie(query)
         }).disposed(by: disposeBag)
     }
 

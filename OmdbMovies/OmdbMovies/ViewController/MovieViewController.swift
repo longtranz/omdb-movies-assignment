@@ -39,6 +39,10 @@ class MovieViewController: UIViewController, UICollectionViewDelegateFlowLayout 
         bindVM()
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        navigationController?.navigationBar.isHidden = false
+    }
+
     private func setupNavigationBar() {
         navigationItem.searchController = searchController
     }
@@ -50,17 +54,27 @@ class MovieViewController: UIViewController, UICollectionViewDelegateFlowLayout 
     private func bindVM() {
         movieViewModel.bindView()
 
-        movieViewModel.movies.bind(to: moviesCollectionView.rx.items(cellIdentifier: MOVIE_CELL_IDENTIFIER, cellType: MovieListCollectionViewCell.self)) { rowIndex, data, cell in
+        movieViewModel.movies
+            .bind(to: moviesCollectionView.rx.items(cellIdentifier: MOVIE_CELL_IDENTIFIER,
+                                                    cellType: MovieListCollectionViewCell.self)) { rowIndex, data, cell in
             cell.bindData(movie: data)
         }.disposed(by: disposeBag)
 
         // Movie selected
-        Observable.zip(moviesCollectionView.rx.itemSelected, moviesCollectionView.rx.modelSelected(MovieListModel.self)).bind { [unowned self] indexPath, movie in
-            moviesCollectionView.deselectItem(at: indexPath, animated: true)
-            if let movieId = movie.imdbID {
-                self.showMovieDetail(movieId)
-            }
+        Observable.zip(moviesCollectionView.rx.itemSelected, moviesCollectionView.rx.modelSelected(MovieListModel.self))
+            .bind { [unowned self] indexPath, movie in
+                moviesCollectionView.deselectItem(at: indexPath, animated: true)
+                if let movieId = movie.imdbID {
+                    self.showMovieDetail(movieId)
+                }
         }.disposed(by: disposeBag)
+
+        searchController.searchBar
+            .rx
+            .text
+            .orEmpty
+            .bind(to: movieViewModel.currentQuery)
+            .disposed(by: disposeBag)
     }
 
     private func showMovieDetail(_ movieId: String) {
