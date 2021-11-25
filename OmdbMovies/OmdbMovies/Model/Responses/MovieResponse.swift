@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct MovieResponse: Decodable {
+struct MovieResponse: Codable {
     let title, year, rated, released: String?
     let runtime, genre, director, writer: String?
     let actors, plot, language, country: String?
@@ -18,7 +18,7 @@ struct MovieResponse: Decodable {
     let metascore, imdbRating, imdbVotes, imdbID: String?
     let type, dvd, boxOffice, production: String?
     let website: String?
-    let response: Bool
+    let response: String?
     let error: String?
 
     enum CodingKeys: String, CodingKey {

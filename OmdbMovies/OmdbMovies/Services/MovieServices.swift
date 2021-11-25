@@ -34,6 +34,16 @@ class MovieServices: MovieServicesProtocol {
 
     public func movieDetail(_ movieId: String) -> Observable<MovieResponse> {
         return Observable<MovieResponse>.create { observer in
+            OmdbApiClient.request(OmdbRouter.detail(movieId: movieId)) { (movieResponse: MovieResponse) in
+                if let success = movieResponse.response?.boolValue, !success {
+                    observer.onError(OmdbApiError.error(message: movieResponse.error ?? "API Error"))
+                }
+
+                observer.onNext(movieResponse)
+            } onError: { error in
+                observer.onError(error)
+            }
+
             return Disposables.create()
         }
     }
