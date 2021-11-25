@@ -12,7 +12,6 @@ import RxDataSources
 
 class MovieViewController: UIViewController, UICollectionViewDelegateFlowLayout {
     @IBOutlet private weak var moviesCollectionView: UICollectionView!
-    private var refreshControl: UIRefreshControl! = UIRefreshControl()
 
     private let MOVIE_CELL_IDENTIFIER = "MovieListCollectionViewCell"
     private let MOVIE_SEARCHBAR_HEADER_IDENTIFIER = "CollectionViewHeader"
@@ -33,7 +32,7 @@ class MovieViewController: UIViewController, UICollectionViewDelegateFlowLayout 
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         setupNavigationBar()
-        setupView()
+        setupCollectionView()
         bindVM()
     }
 
@@ -45,26 +44,14 @@ class MovieViewController: UIViewController, UICollectionViewDelegateFlowLayout 
         navigationItem.searchController = searchController
     }
 
-    private func setupView() {
-        moviesCollectionView.refreshControl = refreshControl
-        // Refresh list
-        refreshControl.rx.controlEvent(.valueChanged).subscribe(onNext: { [weak self] in
+    private func setupCollectionView() {
+        moviesCollectionView.rx.willDisplayCell.subscribe(onNext: { [weak self] cell, indexPath in
             guard let strongSelf = self else {
                 return
             }
 
-            strongSelf.movieViewModel.refreshData.onNext(())
-        }).disposed(by: disposeBag)
-
-        movieViewModel.loading.subscribe(onNext: { [weak self] isLoading in
-            guard let strongSelf = self else {
-                return
-            }
-
-            if isLoading {
-                strongSelf.refreshControl.beginRefreshing()
-            } else {
-                strongSelf.refreshControl.endRefreshing()
+            if indexPath.row >= strongSelf.movieViewModel.movies.value.count - 2 {
+                strongSelf.movieViewModel.fetchMoreData.onNext(())
             }
         }).disposed(by: disposeBag)
     }
