@@ -18,6 +18,7 @@ class MovieViewModel {
 
     var currentQuery: BehaviorRelay<String> = BehaviorRelay(value: "Marvel")
     var fetchMoreData: PublishSubject<Void> = PublishSubject()
+    var refreshData: PublishSubject<Void> = PublishSubject()
 
     var currentPage = 1
 
@@ -35,6 +36,25 @@ class MovieViewModel {
                 strongSelf.movies.accept([])
                 strongSelf.searchMovie(query)
         }).disposed(by: disposeBag)
+
+        fetchMoreData.subscribe { [weak self] _ in
+            self?.fetchNextData()
+        }.disposed(by: disposeBag)
+
+        refreshData.subscribe { [weak self] _ in
+            self?.refreshMovieData()
+        }.disposed(by: disposeBag)
+    }
+
+    private func refreshMovieData() {
+        movies.accept([])
+        currentPage = 1
+        searchMovie(currentQuery.value)
+    }
+
+    private func fetchNextData() {
+        currentPage = currentPage + 1
+        searchMovie(currentQuery.value)
     }
 
     private func searchMovie(_ query: String) {

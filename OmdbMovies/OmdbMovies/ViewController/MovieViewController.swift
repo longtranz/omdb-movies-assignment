@@ -12,7 +12,7 @@ import RxDataSources
 
 class MovieViewController: UIViewController, UICollectionViewDelegateFlowLayout {
     @IBOutlet private weak var moviesCollectionView: UICollectionView!
-    private weak var refreshControl: UIRefreshControl!
+    private var refreshControl: UIRefreshControl! = UIRefreshControl()
 
     private let MOVIE_CELL_IDENTIFIER = "MovieListCollectionViewCell"
     private let MOVIE_SEARCHBAR_HEADER_IDENTIFIER = "CollectionViewHeader"
@@ -21,8 +21,6 @@ class MovieViewController: UIViewController, UICollectionViewDelegateFlowLayout 
 
     private lazy var searchController: UISearchController = {
         let sc = UISearchController(searchResultsController: nil)
-        sc.searchResultsUpdater = self
-        sc.delegate = self
         sc.obscuresBackgroundDuringPresentation = false
         sc.searchBar.placeholder = "Enter text for searching movie"
         sc.searchBar.text = "Marvel"
@@ -39,7 +37,7 @@ class MovieViewController: UIViewController, UICollectionViewDelegateFlowLayout 
         bindVM()
     }
 
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.isHidden = false
     }
 
@@ -49,6 +47,26 @@ class MovieViewController: UIViewController, UICollectionViewDelegateFlowLayout 
 
     private func setupView() {
         moviesCollectionView.refreshControl = refreshControl
+        // Refresh list
+        refreshControl.rx.controlEvent(.valueChanged).subscribe(onNext: { [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+
+            strongSelf.movieViewModel.refreshData.onNext(())
+        }).disposed(by: disposeBag)
+
+        movieViewModel.loading.subscribe(onNext: { [weak self] isLoading in
+            guard let strongSelf = self else {
+                return
+            }
+
+            if isLoading {
+                strongSelf.refreshControl.beginRefreshing()
+            } else {
+                strongSelf.refreshControl.endRefreshing()
+            }
+        }).disposed(by: disposeBag)
     }
 
     private func bindVM() {
@@ -69,6 +87,7 @@ class MovieViewController: UIViewController, UICollectionViewDelegateFlowLayout 
                 }
         }.disposed(by: disposeBag)
 
+        // Search
         searchController.searchBar
             .rx
             .text
@@ -84,11 +103,5 @@ class MovieViewController: UIViewController, UICollectionViewDelegateFlowLayout 
 
         navigationController?.show(movieDetailViewController, sender: self)
         movieDetailViewController.loadMovie(for: movieId)
-    }
-}
-
-extension MovieViewController: UISearchControllerDelegate, UISearchResultsUpdating {
-    func updateSearchResults(for searchController: UISearchController) {
-
     }
 }
